@@ -103,8 +103,8 @@ int comparaison(carte jeu1[52],carte jeu2[52])//comapare les 2 premières cartes
 	else   {printf("erreur dans la comparaison");return(100);}
 }
 
-void cartes_recupere(carte jeu1[52],carte jeu2[52],int a) //envois les 2 premieres cartes de chaque paque dans le paquet de "a"
-{
+void cartes_recupere(carte jeu1[52],carte jeu2[52],int a,int p1,int p2) //envois les cartes de chaque paque dans le paquet de "a"
+{																		//et le place avec p1 ou p2
 	
 }
 
@@ -115,24 +115,30 @@ int nb_de_carte(carte jeu[52]) //détermine le nombre de carte le jeu
 
 void bataille (carte jeu1[52],carte jeu2[52])
 {
+	//nombre de carte a coucher en fonction de la valeur de la carte 
+	//a mettre dans un tas a part ?
+	
+	// avance des cartes
 	
 }
 
 int main ()//le main maggle
 {
-	carte jeu1[52];
-	carte jeu2[52];
-	int gagnant,p1,p2;
-	p1=p2=26;
+	carte jeu1[52];    //jeu du joueur 1
+	carte jeu2[52];    //jeu du joueur 2
+	
+	int gagnant,p1,p2; //nombre de cartes dans les paquet des joueurs 1 et 2
+	p1=p2=26;		   //initialisé a 26
 	
 	init_jeu(jeu1,jeu2);
+	
 	while(p1>0 && p2>0)
 	{
 		gagnant=comparaison(jeu1,jeu2);
 		
 		if (gagnant==0){bataille(jeu1,jeu2);}
 		
-		cartes_recupere(jeu1,jeu2,gagnant);
+		cartes_recupere(jeu1,jeu2,gagnant,p1,p2);
 		p1=nb_de_carte(jeu1);
 		p2=nb_de_carte(jeu2);
 	}
