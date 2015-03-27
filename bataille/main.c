@@ -2,17 +2,27 @@
 //#include <stdio.h> //au cas ou on a pas le graphics.c
 
 
-//faire les #difine
+//faire les #define
 
 typedef struct carte {
 	
 	int coul; //1:coeur / 2:carreau / 3:pique / 4:trèfle
 	int valeur; //valeur de la carte, de 1 à 13
 	int ID; //ID de la carte en fonction du jeu (pour 1 jeu c'est égale a 52, pour 2 c'est 104,..)
-	int dessu; //si besoin est...
-	int dessou;//...on eura besoin de l'un des 2
+	int dessou;// dessou du paquet
 } carte;
 
+void init_paquet(carte jeu[52])//toutes les valeurs du jeu sont mis a 0
+{
+	int a;
+	
+	for (a=0;a<52;a++)
+	{
+		jeu[a].valeur=0;
+		jeu[a].coul=0;
+		jeu[a].ID=0;
+	}
+}
 
 void tri(carte jeu[52]) //initialise le jeu en le mélangant
 {
@@ -52,18 +62,6 @@ void melange(carte jeu[52],carte jeuretour[52])//mélange le paquet jeuretour a 
 	
 }
 
-void init_paquet(carte jeu[52])//toutes les valeurs du jeu sont mis a 0
-{
-	int a;
-	
-	for (a=0;a<52;a++)
-	{
-		jeu[a].valeur=0;
-		jeu[a].coul=0;
-		jeu[a].ID=0;
-	}
-}
-
 void division(carte jeu1[52],carte jeu2[52])//divise le jeu1 en 2, la 2eme moitié va au jeu1
 {
 	int c;
@@ -98,8 +96,11 @@ void init_jeu(carte jeu1[52],carte jeu2[52]) //initialise les jeux 1 et 2 (la mo
 }
 
 int comparaison(carte jeu1[52],carte jeu2[52])//comapare les 2 premières cartes de chaque paquet et return la valeur du gagnant
-{
-	return(0);
+{											  //si il y a égalité c'est 0 qui est return
+	if     (jeu1[0].valeur< jeu2[0].valeur){return(2);}
+	else if(jeu1[0].valeur> jeu2[0].valeur){return(1);}
+	else if(jeu1[0].valeur==jeu2[0].valeur){return(0);}
+	else   {printf("erreur dans la comparaison");return(100);}
 }
 
 void cartes_recupere(carte jeu1[52],carte jeu2[52],int a) //envois les 2 premieres cartes de chaque paque dans le paquet de "a"
@@ -112,18 +113,26 @@ int nb_de_carte(carte jeu[52]) //détermine le nombre de carte le jeu
 	return(0);
 }
 
+void bataille (carte jeu1[52],carte jeu2[52])
+{
+	
+}
+
 int main ()//le main maggle
 {
 	carte jeu1[52];
 	carte jeu2[52];
-	int a,p1,p2;
+	int gagnant,p1,p2;
 	p1=p2=26;
 	
 	init_jeu(jeu1,jeu2);
 	while(p1>0 && p2>0)
 	{
-		a=comparaison(jeu1,jeu2);
-		cartes_recupere(jeu1,jeu2,a);
+		gagnant=comparaison(jeu1,jeu2);
+		
+		if (gagnant==0){bataille(jeu1,jeu2);}
+		
+		cartes_recupere(jeu1,jeu2,gagnant);
 		p1=nb_de_carte(jeu1);
 		p2=nb_de_carte(jeu2);
 	}
