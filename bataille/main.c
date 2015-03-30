@@ -120,7 +120,27 @@ void bataille (carte jeu1[52],carte jeu2[52])
 	
 	// avance des cartes
 	
+	//comparaison
 }
+
+carte combat(carte jeu1[52],carte jeu2[52],int p1,int p2)
+{
+	carte cartesprises[52];
+	int gagnant;
+	
+	gagnant=comparaison(jeu1,jeu2); //comparaison des deux jeux
+			
+	if (gagnant==0){bataille(jeu1,jeu2);} //si c'est 0,il y a battaille
+	
+	cartesprises[0]=jeu1[0];    //prend les première carte des deux jeux
+	cartesprises[1]=jeu2[0];    //pour le mettre dans le jeu de remplacement
+	
+	jeu1
+	
+	avance(jeu1);
+	avance(jeu2);
+	return (cartesprises[52]);
+}		
 
 int main ()//le main maggle
 {
@@ -134,9 +154,7 @@ int main ()//le main maggle
 	
 	while(p1>0 && p2>0)
 	{
-		gagnant=comparaison(jeu1,jeu2);
-		
-		if (gagnant==0){bataille(jeu1,jeu2);}
+		combat(jeu1,jeu2,p1,p2);
 		
 		cartes_recupere(jeu1,jeu2,gagnant,p1,p2);
 		p1=nb_de_carte(jeu1);
