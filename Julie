@@ -1,0 +1,24 @@
+
+Déjà il faut ouvrir le terminal et faire la commande suivante : 
+git clone https://bitbucket.org/defeo/datachallenge-in202.git
+
+
+Ensuite, dans le meme projet cloud sagemath, il faut ouvrir un nouveau notebook et utiliser comme dit dans les consignes :
+import pandas as pd
+stations = pd.read_csv('datachallenge-in202/divvy-stations.csv',
+                       parse_dates=['dateCreated'])
+trajets  = pd.read_hdf('datachallenge-in202/divvy-trips.h5', 'fixed')
+meteo    = pd.read_csv('datachallenge-in202/meteo.csv',
+                       parse_dates=['CST'])
+                       
+                      
+Donc, il faut maintenant s'attaquer à comment on utilise les données.
+
+Pour ça, il faut d'abord vérifier que les données ont bien été importées en créant un dataframe.
+
+
+lignes de configuration nécessaires : 
+%matplotlib inline
+import urllib2, json, datetime
+
+ensuite il faut créer l'objet data qui contiendra les données qu'on va étudier.
