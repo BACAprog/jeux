@@ -15,3 +15,10 @@ meteo    = pd.read_csv('datachallenge-in202/meteo.csv',
 Donc, il faut maintenant s'attaquer à comment on utilise les données.
 
 Pour ça, il faut d'abord vérifier que les données ont bien été importées en créant un dataframe.
+
+
+lignes de configuration nécessaires : 
+%matplotlib inline
+import urllib2, json, datetime
+
+ensuite il faut créer l'objet data qui contiendra les données qu'on va étudier.
