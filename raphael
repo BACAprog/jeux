@@ -1,1 +1,5 @@
-plpop
+//retrier par durée du trajet
+
+a=trajets
+a=a.groupby('tripduration').max().reset_index()
+a
