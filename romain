@@ -1,1 +1,6 @@
-a
+stations // tableau des stations.
+
+stations.dpcapacity.max()  //max de places dans toutes les stations.
+
+stations.id.max() - 300 // nombre minimum de stations suppr.
+
