@@ -53,7 +53,7 @@ paq tri(paq jeu) //initialise le jeu en le mélangant
 	return (jeu);
 }
 
-void melange(paq jeu,paq jeuretour)//mélange le paquet jeuretour a partir du jeu 
+paq melange(paq jeu,paq jeuretour)//mélange le paquet jeuretour a partir du jeu 
 {
 	int c,v,a;
 	
@@ -70,7 +70,7 @@ void melange(paq jeu,paq jeuretour)//mélange le paquet jeuretour a partir du je
 			}
 		}while(v==0);
 	}
-	
+	return(jeuretour);
 }
 
 void division(paq jeu1,paq jeu2)//divise le jeu1 en 2, la 2eme moitié va au jeu1
@@ -98,7 +98,7 @@ void init_jeu(paq *jeu1,paq *jeu2) //initialise les jeux 1 et 2 (la moitié dans
 	
 	//création du jeu3 puis le jeu1 est mélangé
 	jeu3=tri(jeu3);
-	melange(jeu3,*jeu1);
+	*jeu1=melange(jeu3,*jeu1);
 	
 	//divise le jeu
 	division(*jeu1,*jeu2);
@@ -164,7 +164,7 @@ int main ()//le main maggle
 	int a;
 	for (a=0;a<52;a++)
 	{
-		printf("  %d      %d     %d\n",jeu2.car[a].valeur,jeu2.car[a].coul,jeu2.car[a].ID);
+		printf("  %d      %d     %d\n",jeu1.car[a].valeur,jeu1.car[a].coul,jeu1.car[a].ID);
 	}
 	
 	while(filevide(jeu1) && filevide(jeu2)) //filevide revoi 1 pour une file non vide
