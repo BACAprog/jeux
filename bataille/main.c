@@ -145,6 +145,8 @@ paq combat(paq *jeu1,paq *jeu2)
 
 int filevide(paq jeu)
 {
+	
+	
 	return (1);
 }		
 
@@ -156,6 +158,14 @@ int main ()//le main maggle
 	int gagnant; //nombre de cartes dans les paquet des joueurs 1 et 2
 	
 	init_jeu(&jeu1,&jeu2);
+	
+		printf("jeu1\n\n\n");
+		printf("valeur  couleur  ID\n");
+	int a;
+	for (a=0;a<52;a++)
+	{
+		printf("  %d      %d     %d\n",jeu2.car[a].valeur,jeu2.car[a].coul,jeu2.car[a].ID);
+	}
 	
 	while(filevide(jeu1) && filevide(jeu2)) //filevide revoi 1 pour une file non vide
 	{
