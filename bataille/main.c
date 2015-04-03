@@ -9,20 +9,37 @@ typedef struct CARTE {
 	int coul;   //1:coeur / 2:carreau / 3:pique / 4:trèfle
 	int valeur; //valeur de la carte, de 1 à 13
 	int ID;     //ID de la carte en fonction du jeu (pour 1 jeu c'est égale a 52, pour 2 c'est 104,..)
+	int retourne;//0 si verso,1 si recto
 	} CARTE;
 
 typedef struct paquet{
 	
 	CARTE car[52]; //un jeu a 52 carte...
+	int joueur	;   //joueur a qui appartient le jeu
 	int debut;     //debut de la file
 	int fin;	   //fin de la file
 	} paq;
+
+typedef struct connard{	//le moment ou j'ai pété un cable 
+	paq paq1;			//ce...truc sert a...return 2 paquet,juste a ça...
+	paq paq2;
+}connard;
+
+void test_jeu(paq jeu)
+{
+	printf("valeur  couleur  ID  num\n");
+	int a;
+	for (a=0;a<52;a++)
+	{
+		printf("  %d      %d       %d    %d\n",jeu.car[a].valeur,jeu.car[a].coul,jeu.car[a].ID,a+1);
+	}
+}
 
 paq init_paquet(paq jeu)//toutes les valeurs du jeu sont mis a 0
 {
 	int a;
 	
-	for (a=0;a<52;a++)
+	for (a=0;a<=52;a++)
 	{
 		jeu.car[a].valeur=0;
 		jeu.car[a].coul=0;
@@ -37,7 +54,7 @@ paq init_paquet(paq jeu)//toutes les valeurs du jeu sont mis a 0
 paq tri(paq jeu) //initialise le jeu en le mélangant
 {
 	int a,b;
-	int ID=1;
+	int ID=0;
 	
 	for(a=1;a<=13;a++)
 	{
@@ -46,7 +63,7 @@ paq tri(paq jeu) //initialise le jeu en le mélangant
 			
 			jeu.car[ID].valeur=a;
 			jeu.car[ID].coul=b;
-			jeu.car[ID].ID=ID;
+			jeu.car[ID].ID=ID+1;
 			ID++; 
 		}
 	}
@@ -65,7 +82,7 @@ paq melange(paq jeu,paq jeuretour)//mélange le paquet jeuretour a partir du jeu
 			
 			if(jeuretour.car[a].ID==0)
 			{
-				jeuretour.car[a]=jeu.car[c];
+				jeuretour.car[a]=jeu.car[c-1];
 				v=1;
 			}
 		}while(v==0);
@@ -73,8 +90,9 @@ paq melange(paq jeu,paq jeuretour)//mélange le paquet jeuretour a partir du jeu
 	return(jeuretour);
 }
 
-void division(paq jeu1,paq jeu2)//divise le jeu1 en 2, la 2eme moitié va au jeu1
+connard division(paq jeu1,paq jeu2)//divise le jeu1 en 2, la 2eme moitié va au jeu1
 {
+	connard a;
 	int c;
 	
 	for(c=26;c<=52;c++)
@@ -84,14 +102,18 @@ void division(paq jeu1,paq jeu2)//divise le jeu1 en 2, la 2eme moitié va au jeu
 		jeu1.car[c].valeur=0;
 		jeu1.car[c].coul=0;
 	}
+	a.paq1=jeu1;
+	a.paq2=jeu2;
+	return(a);
 	
 }
 
 void init_jeu(paq *jeu1,paq *jeu2) //initialise les jeux 1 et 2 (la moitié dans chaque)
 {
 	paq jeu3;
+	connard a;
 	
-	//initialisation des paquet(optionel)?
+	//initialisation des paquet?
 	*jeu1=init_paquet(*jeu1);
 	*jeu2=init_paquet(*jeu2);
 	jeu3=init_paquet(jeu3);
@@ -101,8 +123,10 @@ void init_jeu(paq *jeu1,paq *jeu2) //initialise les jeux 1 et 2 (la moitié dans
 	*jeu1=melange(jeu3,*jeu1);
 	
 	//divise le jeu
-	division(*jeu1,*jeu2);
-	
+	a=division(*jeu1,*jeu2);
+	*jeu1=a.paq1;
+	*jeu2=a.paq2;
+	test_jeu(*jeu2);
 	
 }
 
@@ -158,14 +182,6 @@ int main ()//le main maggle
 	int gagnant; //nombre de cartes dans les paquet des joueurs 1 et 2
 	
 	init_jeu(&jeu1,&jeu2);
-	
-		printf("jeu1\n\n\n");
-		printf("valeur  couleur  ID\n");
-	int a;
-	for (a=0;a<52;a++)
-	{
-		printf("  %d      %d     %d\n",jeu1.car[a].valeur,jeu1.car[a].coul,jeu1.car[a].ID);
-	}
 	
 	while(filevide(jeu1) && filevide(jeu2)) //filevide revoi 1 pour une file non vide
 	{
