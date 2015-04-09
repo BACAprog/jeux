@@ -22,6 +22,8 @@ typedef struct paquet{
 typedef struct connard{	//le moment ou j'ai pété un cable 
 	paq paq1;			//ce...truc sert a...return 2 paquet,juste a ça...
 	paq paq2;
+	paq paq3;
+	
 }connard;
 
 void test_jeu(paq jeu)
@@ -150,19 +152,23 @@ void cartes_recupere(paq *jeu1,paq *jeu2,int a) //envois les cartes de chaque pa
 }
 
 
-void bataille (paq *jeu1,paq *jeu2)
+paq bataille (paq *jeu1,paq *jeu2)
 {
+	paq cartesprises;
+	init_paquet(cartesprises);
 	//nombre de carte a coucher en fonction de la valeur de la carte 
 	//a mettre dans un tas a part ?
 	
 	// avance des cartes
-	
+		jeu1.car[51].coul=1000;
 	//comparaison
+	return(cartesprises);
 }
 
 paq combat(paq *jeu1,paq *jeu2)
 {
 	paq cartesprises;
+	init_paquet(cartesprises);
 			
 	if (comparaison(*jeu1,*jeu2)==0){bataille(jeu1,jeu2);} //si c'est 1,il y a battaille(même carte)
 	
@@ -252,6 +258,7 @@ int main ()//le main maggle
 	affiche_carte_vierge();
 	
 	init_jeu(&jeu1,&jeu2);
+	test_jeu(jeu2);
 	
 	while(filevide(jeu1) && filevide(jeu2)) //filevide renvoit 1 pour une file non vide
 	{
