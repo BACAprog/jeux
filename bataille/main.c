@@ -173,43 +173,53 @@ paq combat(paq *jeu1,paq *jeu2)
 	return (cartesprises);
 }
 
-int filevide(paq jeu)
+int filevide(paq jeu)//0 si la file est vide
 {
-	//même progrmme que la prof....quand il sera en ligne
+
+	if (jeu.debut == jeu.fin){return 0;}
+	else{return 1;}
 	
-	return (1);
 }
 
 // affichage carte
-void affiche_carte_retourne( POINT hg, POINT bd, POINT hg2, POINT bd2){
+void affiche_carte_retourne( POINT hg, POINT bd, POINT hg2, POINT bd2)
+{
 	POINT l1, l2, l3, l4;
+	int a=0 ;
+	
 	l1.x = l3.x= hg.x + 5;
 	l2.x = l4.x= bd.x - 5;
 	
 	l1.y = l2.y = bd.y +5;
 	l3.y = l4.y = bd2.y + 5;
 	
-	int a=0 ;
-	
 	draw_line(l1,l2 ,red);
 	draw_line(l3, l4, red);
-	while (a < 90){
+	while (a < 90)
+	{
 		l1.y = l2.y = l1.y + 5;
 		l3.y = l4.y = l3.y +5; 
+		
 		draw_line(l1,l2 ,red);
 		draw_line(l3, l4, red);
 		a = a + 5;
 	}
 }
-void affiche_carte_vierge(){
+void affiche_carte_vierge()
+{
+	
+	POINT  centrej1, centrej1_dos, centrej2, centrej2_dos;
+	POINT hg, bd, hg2, bd2, hg3, bd3, hg4, bd4;
+	
 	// emplacement des cartes les bitchez
-	POINT centrej1, centrej1_dos, centrej2, centrej2_dos;
 	centrej1.x = centrej1_dos.x = centrej2.x = centrej2_dos.x = 450;
 	centrej1.y = 200; centrej1_dos.y= 75;
 	centrej2.y = 400; centrej2_dos.y= 525;
 	
+	hg=centrej1;		//ligne inutile qui empeche le waring en compilation
+	
 	// rectangles cartes
-	POINT hg, bd, hg2, bd2, hg3, bd3, hg4, bd4;
+
 	
 	hg.x = hg2.x = hg3.x = hg4.x = 425;
 	bd.x = bd2.x = bd3.x = bd4.x = 475;
@@ -232,13 +242,18 @@ int main ()//le main maggle
 {
 	paq jeu1;    //jeu du joueur 1
 	paq jeu2;    //jeu du joueur 2
-	affiche_auto_off();
 	int gagnant; //nombre de cartes dans les paquet des joueurs 1 et 2
+	
+	init_graphics(600,600);
+	
+	affiche_auto_off();
+	
 	fill_screen(green);
 	affiche_carte_vierge();
+	
 	init_jeu(&jeu1,&jeu2);
 	
-	while(filevide(jeu1) && filevide(jeu2)) //filevide revoi 1 pour une file non vide
+	while(filevide(jeu1) && filevide(jeu2)) //filevide renvoit 1 pour une file non vide
 	{
 		combat(&jeu1,&jeu2);
 		
