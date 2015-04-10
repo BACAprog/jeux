@@ -4,3 +4,24 @@ stations.dpcapacity.max()  //max de places dans toutes les stations.
 
 stations.id.max() - 300 // nombre minimum de stations suppr.
 
+Nous pouvons voir les premières données afin d'éviter n tableau imposat avec la commande :
+
+nom_du_tableau.head()    //ne montre que les premières lignes.
+
+nom_du_tableau.sort(columns='nom-de-la-colonne') // trie par rapport à la colonne.
+
+nom_du_tableau[0:3] // tranche les rangés (donne la colonne 0 à 3 seulement).
+
+nom_du_tableau['20130102':'20130104'] // on peut aussi le faire pour des dates.
+
+nom_du_tableau.loc[dates[0]] // met la ligne 1 en colonne.
+
+nom_du_tableau.loc[:,['nom_de_la_colonne1','nom_de_la_colonne2']] // multi-axe (2 colonnes en lignes)
+
+nom_du_tableau.loc['20130102':'20130104', ['nom_de_la_colonne1','nom_de_la_colonne2']] la même sauf restreint à certaines dates.
+
+df.iloc[1:3,:] // tranche les rangées (1 à 3 par exemple)
+
+df.iloc[:,1:3] // tranche les colonnes (1 à 3 par exemple)
+
+nom_du_tableau[nom_du_tableau.nom_de_la_colonne>0] //
