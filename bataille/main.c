@@ -160,7 +160,7 @@ paq bataille (paq *jeu1,paq *jeu2)
 	//a mettre dans un tas a part ?
 	
 	// avance des cartes
-		jeu1.car[51].coul=1000;
+		jeu1.car[51].coul=1000; //pourquoi le.coul ? :O 
 	//comparaison
 	return(cartesprises);
 }
