@@ -1,1 +1,100 @@
+#include "graphics.h"
+
+#define l   500 //largeure de la fenêtre 
+#define h   500 //hauteure de la fenêtre 
+#define cas 4   //taille en pixel d'une case
+
+typedef struct carre{
+	int taille; //taille du carré (sur 100)
+	int vitesse;//si c'est égale a 1 ça avance tout les tours, si 2 tout les 2 tours,ect...
+	int camps;  //0=vide, 1=rouge, 2=bleu, 3=obstacle
+	int posx;	//position en x(collonne)
+	int posy;	//position en y(ligne)
+	}carre;
+
+carre terr[l/cas][h/cas];
+
+
+//initialisations
+
+void creation_obstacle()
+{
+	
+}
+
+carre intialisation_carre()
+{
+	carre a;
+	
+	return(a);
+}
+
+
+void intialisation_terrain()
+{
+	int a,z;
+	
+	for(a=0;a<l/cas;a++)
+	{
+		for(z=0;z<h/cas;z++)
+		{
+			terr[a][z].taille=0;
+			terr[a][z].vitesse=0;
+			terr[a][z].camps=0;
+			terr[a][z].posx=0;
+			terr[a][z].posy=0;
+		}
+	}
+	creation_obstacle();
+	
+}
+
+//affichage
+void affiche_obstacle()
+{
+	
+}
+
+void affiche_carre()
+{
+	
+}
+
+void affichage()
+{
+	fill_screen(noir);
+	affiche_obstacle();
+	affiche_carre();
+	affiche_all();
+}
+
+//déplacement
+void deplacement()
+{
+	
+}
+
+
+//pop nourriture
+void pop_nourriture()
+{
+	
+}
+
+int main ()
+{
+	init_graphics(l,h);
+	affiche_auto_off();
+	
+	intialisation_terrain();
+	
+	while(1)
+	{
+		affichage();
+		deplacement();
+		pop_nourriture();
+	}
+	
+
+}
 
